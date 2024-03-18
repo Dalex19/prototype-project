@@ -1,4 +1,4 @@
-# my_startup
+# undefined_app_name
 
 A new Flutter project.
 
