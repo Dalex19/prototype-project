@@ -5,7 +5,7 @@ import 'package:my_startup/ui/screens/widgets/my_prefix_icon.dart';
 import '../../../helpers/helpers.dart';
 
 class UserForm extends StatefulWidget {
-  final void Function(CountryCode?) updatePicked;
+  final void Function(CountryCode?)? updatePicked;
   final CountryCode? picked;
 
   const UserForm({super.key, required this.updatePicked, required this.picked});
@@ -60,11 +60,13 @@ class _UserFormState extends State<UserForm> {
         TextField(
           controller: _telController,
           onTap: () async {
-            Helpers.selectCountry(context, (CountryCode result) {
-              setState(() {
-                widget.updatePicked(result);
+            if (widget.updatePicked != null) {
+              Helpers.selectCountry(context, (CountryCode result) {
+                setState(() {
+                  widget.updatePicked!(result);
+                });
               });
-            });
+            } 
           },
           keyboardType: TextInputType.number,
           decoration: InputDecoration(

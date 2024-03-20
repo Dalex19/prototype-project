@@ -73,6 +73,8 @@ class _TeamState extends State<Team> {
             builder: (context) => LeaderMember(
                   numberOfParticipants: numberOfParticipants,
                   teamName: _teamnameController.text,
+                  picked: picked,
+                  updatePicked: updatePicked,
                 )));
   }
 

@@ -8,11 +8,16 @@ import '../../../widgets/register_member.dart';
 class LeaderMember extends StatefulWidget {
   int numberOfParticipants = 0;
   String teamName;
-  LeaderMember({
-    Key? key,
-    required this.numberOfParticipants,
-    required this.teamName,
-  }) : super(key: key);
+  CountryCode? picked;
+  final void Function(CountryCode?) updatePicked;
+
+  LeaderMember(
+      {Key? key,
+      required this.numberOfParticipants,
+      required this.teamName,
+      required this.picked,
+      required this.updatePicked})
+      : super(key: key);
 
   @override
   _LeaderMemberState createState() => _LeaderMemberState();
@@ -24,14 +29,7 @@ class _LeaderMemberState extends State<LeaderMember> {
   final TextEditingController _telController = TextEditingController();
   final PageController myPageController = PageController();
 
-  CountryCode? picked;
   bool showPageView = false;
-
-  void updatePicked(CountryCode? newPicked) {
-    setState(() {
-      picked = newPicked;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +42,15 @@ class _LeaderMemberState extends State<LeaderMember> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: picked != null
+                  mainAxisAlignment: widget.picked != null
                       ? MainAxisAlignment.start
                       : MainAxisAlignment.center,
                   children: [
                     Text('Miembro Lider de ${widget.teamName}'),
                     const SizedBox(height: 20),
-                    UserForm(updatePicked: updatePicked, picked: picked),
+                    UserForm(updatePicked: null, picked: widget.picked),
                     const SizedBox(height: 25),
-                    if (picked != null) Location(picked: picked),
+                    if (widget.picked != null) Location(picked: widget.picked),
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
